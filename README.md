@@ -12,9 +12,10 @@ Each agent can sense through 3 sensors that is located on 3 directions: top, lef
 `Simple 3x3 Blur Function` is used to smooth and evaporate the trails.
 ## Agent Structure
 ![Image](https://github.com/UxxHans/Rainbow-Cats-Microbiome-Simulator/blob/main/Pics/Agent.png)
-## Screenshots
+## Recorded GIFs
 ![Image](https://github.com/UxxHans/Rainbow-Cats-Microbiome-Simulator/blob/main/Pics/Animation02.gif)
 ![Image](https://github.com/UxxHans/Rainbow-Cats-Microbiome-Simulator/blob/main/Pics/Animation01.gif)
+## Screenshots
 ![Image](https://github.com/UxxHans/Rainbow-Cats-Microbiome-Simulator/blob/main/Pics/Pic01.png)
 ![Image](https://github.com/UxxHans/Rainbow-Cats-Microbiome-Simulator/blob/main/Pics/Pic02.png)
 ![Image](https://github.com/UxxHans/Rainbow-Cats-Microbiome-Simulator/blob/main/Pics/Pic00.png)
