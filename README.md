@@ -2,6 +2,7 @@
 A small program that simulates organic patterns of microbiome.
 ## Reference
 Idea from Sebastian Lague's coding adventure.
+
 https://www.youtube.com/watch?v=X-iSQQgOd1A&ab_channel=SebastianLague
 ## Main Concept
 Generate agents that can trace other agents' trails. 
