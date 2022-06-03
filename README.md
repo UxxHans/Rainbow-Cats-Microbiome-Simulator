@@ -9,10 +9,11 @@ Generate agents that can trace other agents' trails.
 Each agent can sense through 3 sensors that is located on 3 directions: top, left and right.
 
 3x3 blur function is used to smooth and evaporate the trails.
+## Agent Structure
+![Image](https://github.com/UxxHans/Rainbow-Cats-Microbiome-Simulator/blob/main/Pics/Agent.png)
 ## Screenshots
 ![Image](https://github.com/UxxHans/Rainbow-Cats-Microbiome-Simulator/blob/main/Pics/Pic01.png)
 ![Image](https://github.com/UxxHans/Rainbow-Cats-Microbiome-Simulator/blob/main/Pics/Pic02.png)
-![Image](https://github.com/UxxHans/Rainbow-Cats-Microbiome-Simulator/blob/main/Pics/Agent.png)
 ![Image](https://github.com/UxxHans/Rainbow-Cats-Microbiome-Simulator/blob/main/Pics/Animation02.gif)
 ![Image](https://github.com/UxxHans/Rainbow-Cats-Microbiome-Simulator/blob/main/Pics/Animation01.gif)
 ![Image](https://github.com/UxxHans/Rainbow-Cats-Microbiome-Simulator/blob/main/Pics/Pic03.png)
