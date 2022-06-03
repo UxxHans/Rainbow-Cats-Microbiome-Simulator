@@ -7,7 +7,7 @@ import processing.core.PApplet;
  */
 public class App extends PApplet {
 
-    public int totalAgents = 10000;
+    public int totalAgents = 100000;
     public Agent[] agents;
 
     /**
@@ -31,7 +31,7 @@ public class App extends PApplet {
         //Spawn agents in a circle.
         agents = new Agent[totalAgents];
         for(int i=0; i<totalAgents; i++){
-            final double maxDistance = 100;
+            final double maxDistance = 200;
             double randomAngle = 2 * Math.PI * Math.random();
             double randomDistance = maxDistance * Math.random();
 
@@ -47,18 +47,30 @@ public class App extends PApplet {
      * Draw all elements by current frame.
     */
     public void draw() {
+        //Move agents.
+        thread("tickThread");
+
         loadPixels();
 
         //Blur the pixels
         blur();
-
-        //Move and draw agents.
+        
+        //Draw agents.
         for (Agent a : agents) { 
-            a.tick(this);
             a.draw(this); 
         }
 
         updatePixels();
+    }
+
+    /**
+     * Put logic of each agent on another thread
+     */
+    public void tickThread(){
+        loadPixels();
+        for (int i = 0; i < totalAgents; i++) { 
+            agents[i].tick(this);
+        }
     }
 
     /**
@@ -72,7 +84,7 @@ public class App extends PApplet {
         int R_MASK = 255<<16;   //[0000 0000 1111 1111 0000 0000 0000 0000]
         
         float diffuseSpeed = 10f;
-        int darkenSpeed = 1000;
+        int darkenSpeed = 2000;
         
         int darkenDelta = (int)(darkenSpeed * GlobalSettings.DELTA_TIME);
 

@@ -9,7 +9,7 @@ public class Agent {
     public Vector2<Double> position;   //Current position of the microbiome.
     public double angle = 0.0f;        //Current angle of the microbiome.
     public double moveSpeed = 100.0f;  //Move speed of the single microbiome. 
-    public double turnSpeed = 38.0f;   //Turning speed of the single microbiome.
+    public double turnSpeed = 80.0f;   //Turning speed of the single microbiome.
 
     public int colorR = 220;            //Color R value.
     public int colorG = 225;            //Color G value.
