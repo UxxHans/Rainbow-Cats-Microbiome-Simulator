@@ -5,7 +5,7 @@ Idea from Sebastian Lague's coding adventure.
 
 https://www.youtube.com/watch?v=X-iSQQgOd1A&ab_channel=SebastianLague
 ## Main Concept
-Generate agents that can trace other agents' trails. Experiments have done for 100,000 agents.
+Generate agents that can trace other agents' trails. Have done experiment for 100,000 agents.
 
 Each agent can sense through 3 sensors that is located on 3 directions: top, left and right.
 
