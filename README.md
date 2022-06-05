@@ -13,6 +13,7 @@ Each agent can sense through 3 sensors that is located on 3 directions: top, lef
 ## Agent Structure
 ![Image](https://github.com/UxxHans/Rainbow-Cats-Microbiome-Simulator/blob/main/Pics/Agent.png)
 ## Recorded GIFs
+![Image](https://github.com/UxxHans/Rainbow-Cats-Microbiome-Simulator/blob/main/Pics/Animation03.gif)
 ![Image](https://github.com/UxxHans/Rainbow-Cats-Microbiome-Simulator/blob/main/Pics/Animation02.gif)
 ![Image](https://github.com/UxxHans/Rainbow-Cats-Microbiome-Simulator/blob/main/Pics/Animation01.gif)
 ## Screenshots
