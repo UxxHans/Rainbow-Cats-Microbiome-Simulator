@@ -6,18 +6,38 @@ import processing.core.PApplet;
  * This is a representation of a microbiome.
  */
 public class Agent {
-    public Vector2<Double> position;   //Current position of the microbiome.
-    public double angle = 0.0f;        //Current angle of the microbiome.
-    public double moveSpeed = 100.0f;  //Move speed of the single microbiome. 
-    public double turnSpeed = 80.0f;   //Turning speed of the single microbiome.
+    private Vector2<Double> position;   //Current position of the microbiome.
+    private double angle = 0.0f;        //Current angle of the microbiome.
+    private double moveSpeed = 100.0;  //Move speed of the single microbiome. 
+    private double turnSpeed = 80.0;   //Turning speed of the single microbiome.
 
-    public int colorR = 220;            //Color R value.
-    public int colorG = 225;            //Color G value.
-    public int colorB = 255;            //Color B value.
+    private int colorR = 255;            //Color R value.
+    private int colorG = 255;            //Color G value.
+    private int colorB = 255;            //Color B value.
 
-    public final int SENSOR_SIZE = 1;                       //The size of the sensor.
-    public final double SENSOR_DISTANCE = 8;                //The distance of the sensor from the position.
-    public final double SENSOR_OFFSET_ANGLE = Math.PI / 4;  //The angle offset of each sensor.
+    private int sensorSize = 1;                       //The size of the sensor.
+    private double sensorDistance = 8;                //The distance of the sensor from the position.
+    private double sensorOffsetAngle = Math.PI / 4;   //The angle offset of each sensor.
+
+    private final int BORDER_SIZE = 15;
+
+    public Agent(Vector2<Double> position, double angle, double moveSpeed, double turnSpeed,
+     int sensorSize, double sensorDistance, double sensorOffsetAngle, int colorR, int colorG, int colorB) {
+
+        this.position = position;
+        this.angle = angle;
+
+        this.moveSpeed = moveSpeed;
+        this.turnSpeed = turnSpeed;
+
+        this.sensorSize = sensorSize;
+        this.sensorDistance = sensorDistance;
+        this.sensorOffsetAngle = sensorOffsetAngle;
+
+        this.colorR = colorR;
+        this.colorG = colorG;
+        this.colorB = colorB;
+    }
 
     public Agent(Vector2<Double> position, double angle) {
         this.position = position;
@@ -56,9 +76,9 @@ public class Agent {
      * @param randomSteerStrength The random number generated.
      */
     public void steer(PApplet mainProgram, double randomSteerStrength){
-        int weightForward = sense(mainProgram, SENSOR_DISTANCE, 0, SENSOR_SIZE);
-        int weightLeft = sense(mainProgram, SENSOR_DISTANCE, SENSOR_OFFSET_ANGLE, SENSOR_SIZE);
-        int weightRight = sense(mainProgram, SENSOR_DISTANCE, -SENSOR_OFFSET_ANGLE, SENSOR_SIZE);
+        int weightForward = sense(mainProgram, sensorDistance, 0, sensorSize);
+        int weightLeft = sense(mainProgram, sensorDistance, sensorOffsetAngle, sensorSize);
+        int weightRight = sense(mainProgram, sensorDistance, -sensorOffsetAngle, sensorSize);
 
         //Move forward if the weight forward is dominant.
         if(weightForward > weightLeft && weightForward > weightRight){
@@ -84,6 +104,16 @@ public class Agent {
      * @return The sum of RGB.
      */
     public int sumRGB(int sample){
+        int[] color = getColor(sample);
+        return color[0] + color[1] + color[2];
+    }
+
+    /**
+     * Convert int color value to RGB int array.
+     * @param sample The int color value.
+     * @return Returns the RGB int array. rgb[0]=R, rgb[1]=G, rgb[2]=B. 
+     */
+    public int[] getColor(int sample){
         //The int value of color is represented as XRGB
         //which is constructed in [0000 0000 RRRR RRRR GGGG GGGG BBBB BBBB]
         int B_MASK = 255;       //[0000 0000 0000 0000 0000 0000 1111 1111]
@@ -92,11 +122,12 @@ public class Agent {
 
         //Use only single color part in bits and shift it to the right.
         //In this way we created a set of valid RGB values.
-        int b = sample & B_MASK;
-        int g = (sample & G_MASK)>>8;
-        int r = (sample & R_MASK)>>16;
+        int[] rgb = new int[3];
+        rgb[2] = sample & B_MASK;           //B
+        rgb[1] = (sample & G_MASK)>>8;      //G
+        rgb[0] = (sample & R_MASK)>>16;     //R
 
-        return r + g + b;
+        return rgb;
     }
 
     /**
@@ -113,8 +144,8 @@ public class Agent {
         steer(mainProgram, random);
 
         if(newX < 0 || newX >= GlobalSettings.CANVAS_WIDTH || newY < 0 || newY >= GlobalSettings.CANVAS_HEIGHT){
-            newX = Math.min(GlobalSettings.CANVAS_WIDTH - 1, Math.max(0, newX));
-            newY = Math.min(GlobalSettings.CANVAS_HEIGHT - 1, Math.max(0, newY));
+            newX = Math.min(GlobalSettings.CANVAS_WIDTH - BORDER_SIZE, Math.max(BORDER_SIZE, newX));
+            newY = Math.min(GlobalSettings.CANVAS_HEIGHT - BORDER_SIZE, Math.max(BORDER_SIZE, newY));
             angle = random * 2 * Math.PI;
         }
 
@@ -123,10 +154,18 @@ public class Agent {
     }
 
     /**
-     * Draw the agent.
+     * Draw the agent. Each agent add the value of the pixel with its color.
      * @param mainProgram The program that renders.
      */
     public void draw(PApplet mainProgram){
-        mainProgram.pixels[position.y.intValue() * GlobalSettings.CANVAS_WIDTH + position.x.intValue()] = mainProgram.color(colorR, colorG, colorB);
+        
+        int originalColor = mainProgram.pixels[position.y.intValue() * GlobalSettings.CANVAS_WIDTH + position.x.intValue()];
+        int[] originalRGB = getColor(originalColor);
+
+        int finalR = Math.min(255, originalRGB[0] + colorR);
+        int finalG = Math.min(255, originalRGB[1] + colorG);
+        int finalB = Math.min(255, originalRGB[2] + colorB);
+          
+        mainProgram.pixels[position.y.intValue() * GlobalSettings.CANVAS_WIDTH + position.x.intValue()] = mainProgram.color(finalR, finalG, finalB);
     }
 }
