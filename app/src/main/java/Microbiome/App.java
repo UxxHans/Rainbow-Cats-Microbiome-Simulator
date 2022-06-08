@@ -10,7 +10,7 @@ import processing.core.PFont;
 public class App extends PApplet {
 
     public Agent[] agents;
-    public int totalAgents = 80000;
+    public int totalAgents = 50000;
     public double maxSpawnDistance = 200;
     public double minSpawnDistance = 100;
 
